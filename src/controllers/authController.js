@@ -38,8 +38,8 @@ export const register = async (req, res) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: process.env.ETHEREAL_USER,
-        pass: process.env.ETHEREAL_PASS,
+        user: "lucas.pagac60@ethereal.email",
+        pass: "uSdt386aGWYxs99ZzH",
       },
     });
 
@@ -61,7 +61,6 @@ export const register = async (req, res) => {
           success: true,
           message: "User registered successfully. Please verify your email.",
           user: {
-            id: user._id,
             name: user.name,
             email: user.email,
           },
@@ -103,11 +102,9 @@ export const login = async (req, res) => {
         success: true,
         message: "Login successful",
         user: {
-          id: user._id,
           name: user.name,
           email: user.email,
         },
-        token: generateToken(user._id),
       });
     } else {
       res.status(401).json({
@@ -200,8 +197,8 @@ export const forgotPassword = async (req, res) => {
       host: "smtp.ethereal.email",
       port: 587,
       auth: {
-        user: process.env.ETHEREAL_USER,
-        pass: process.env.ETHEREAL_PASS,
+        user: "lucas.pagac60@ethereal.email",
+        pass: "uSdt386aGWYxs99ZzH",
       },
     });
 
@@ -222,7 +219,6 @@ export const forgotPassword = async (req, res) => {
         return res.status(200).json({
           success: true,
           message: "Email sent",
-          info,
         });
       }
     });
@@ -235,7 +231,8 @@ export const forgotPassword = async (req, res) => {
 // @route   POST /api/auth/reset-password
 // @access  Public
 export const resetPassword = async (req, res) => {
-  const { token, password } = req.body;
+  const { password } = req.body;
+  const { token } = req.query;
 
   try {
     const user = await User.findOne({

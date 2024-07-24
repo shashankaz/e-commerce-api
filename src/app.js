@@ -9,6 +9,7 @@ import cartRoutes from "./routes/cartRoutes.js";
 import wishlistRoutes from "./routes/wishlistRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import supportRoutes from "./routes/supportRoutes.js";
+import checkoutRoutes from "./routes/checkoutRoutes.js";
 
 export const app = express();
 config();
@@ -30,6 +31,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/support", supportRoutes);
+app.use("/api/checkout", checkoutRoutes);
 
 app.get("/", (req, res) => {
   res.json({
